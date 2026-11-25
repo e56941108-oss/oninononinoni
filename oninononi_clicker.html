@@ -1,0 +1,2315 @@
+```html
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#0f1221">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Онининони">
+<title>Онининони Кликер ×10 000: Топы мира</title>
+<style>
+  :root {
+    --bg: #0f1221;
+    --panel: #181d34;
+    --panel-2: #212847;
+    --accent: #7c5cff;
+    --accent-2: #22d3ee;
+    --gold: #fbbf24;
+    --green: #34d399;
+    --pink: #f472b6;
+    --red: #fb7185;
+    --text: #f3f5ff;
+    --muted: #9aa3c7;
+    --border: rgba(255,255,255,0.1);
+    --bg-grad: radial-gradient(circle at top, #1d2444 0%, var(--bg) 65%);
+    --input-bg: #0b0e1b;
+    --btn-hover: #2c355e;
+  }
+  body.light-theme {
+    --bg: #f1f5f9;
+    --panel: #ffffff;
+    --panel-2: #e2e8f0;
+    --accent: #6366f1;
+    --accent-2: #0284c7;
+    --gold: #d97706;
+    --green: #059669;
+    --pink: #db2777;
+    --red: #e11d48;
+    --text: #0f172a;
+    --muted: #475569;
+    --border: rgba(15,23,42,0.12);
+    --bg-grad: radial-gradient(circle at top, #e0e7ff 0%, var(--bg) 68%);
+    --input-bg: #f8fafc;
+    --btn-hover: #cbd5e1;
+  }
+  * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: var(--bg-grad);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    padding-bottom: 32px;
+    transition: background 0.25s ease, color 0.2s ease;
+  }
+  * { box-sizing: border-box; user-select: none; -webkit-tap-highlight-color: transparent; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: radial-gradient(circle at top, #1d2444 0%, var(--bg) 65%);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 12px;
+    padding-bottom: 32px;
+  }
+  .app {
+    max-width: 980px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* PWA Install Banner */
+  .pwa-banner {
+    background: linear-gradient(135deg, rgba(124,92,255,0.25), rgba(34,211,238,0.18));
+    border: 1px solid rgba(34,211,238,0.45);
+    border-radius: 16px;
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .pwa-banner.hidden { display: none; }
+  .pwa-info { display: flex; align-items: center; gap: 10px; font-size: 0.86rem; }
+  .pwa-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-2));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.35rem; flex-shrink: 0;
+  }
+
+  /* Topbar */
+  .topbar {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 12px 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .title-wrap h1 {
+    margin: 0;
+    font-size: 1.18rem;
+    background: linear-gradient(90deg, var(--text), var(--accent-2), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .status-line {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .net-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 8px var(--green);
+    display: inline-block;
+  }
+  .net-dot.offline { background: var(--gold); box-shadow: 0 0 8px var(--gold); }
+  .top-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .profile-chip {
+    background: var(--panel-2);
+    border: 1px solid rgba(124,92,255,0.45);
+    border-radius: 12px;
+    padding: 6px 11px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .profile-chip:hover { background: var(--btn-hover); }
+
+  button {
+    border: 1px solid var(--border);
+    background: var(--panel-2);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 8px 12px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.08s ease, background 0.15s ease, opacity 0.15s ease;
+  }
+  button:hover:not(:disabled) { background: var(--btn-hover); }
+  button:active:not(:disabled) { transform: scale(0.97); }
+  button:disabled { opacity: 0.45; cursor: not-allowed; }
+  button.primary {
+    background: linear-gradient(135deg, var(--accent), #5b3df5);
+    border-color: transparent;
+    color: #fff;
+  }
+  button.gold {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #111;
+    border-color: transparent;
+  }
+  button.cyan {
+    background: linear-gradient(135deg, #06b6d4, #2563eb);
+    color: #fff;
+    border-color: transparent;
+  }
+
+  /* Navigation Tabs */
+  .tabs {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 5px;
+    background: var(--panel);
+    padding: 6px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    border-radius: 11px;
+    padding: 9px 4px;
+    font-size: 0.78rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    min-width: 52px;
+  }
+  @media (min-width: 720px) {
+    .tab-btn { flex-direction: row; justify-content: center; gap: 6px; font-size: 0.88rem; padding: 10px; }
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    border-radius: 11px;
+    padding: 9px 4px;
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  @media (min-width: 640px) {
+    .tab-btn { flex-direction: row; justify-content: center; gap: 6px; font-size: 0.9rem; padding: 10px; }
+  }
+  .tab-btn.active {
+    background: var(--panel-2);
+    color: var(--accent-2);
+    box-shadow: inset 0 0 0 1px rgba(34,211,238,0.35);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* Stats & Progress */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 9px;
+    margin-bottom: 12px;
+  }
+  @media (min-width: 680px) {
+    .stats-grid { grid-template-columns: repeat(6, 1fr); }
+  }
+  .stat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 11px 13px;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); }
+  .stat-value { font-size: 1.25rem; font-weight: 800; margin-top: 2px; color: var(--gold); }
+  .stat-sub { font-size: 0.74rem; color: var(--accent-2); margin-top: 2px; }
+
+  .progress-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    padding: 11px 14px;
+    margin-bottom: 12px;
+  }
+  .rebirth-banner {
+    background: linear-gradient(135deg, rgba(251,191,36,0.16), rgba(124,92,255,0.2));
+    border: 1px solid rgba(251,191,36,0.45);
+    border-radius: 16px;
+    padding: 12px 15px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .rebirth-banner strong { display: block; font-size: 0.92rem; color: var(--gold); }
+  .rebirth-banner span { font-size: 0.78rem; color: var(--muted); }
+  .progress-head {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    margin-bottom: 6px;
+  }
+  .progress-bar {
+    height: 11px;
+    background: var(--input-bg);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .progress-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--green));
+    transition: width 0.2s ease;
+  }
+
+  /* Click Arena */
+  .click-arena {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 20px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .equipped-strip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+  }
+  .pet-helper {
+    background: var(--panel-2);
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 13px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.8rem;
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+  }
+  .pet-helper.bump {
+    transform: translateY(-7px) scale(1.12);
+    box-shadow: 0 0 18px rgba(34,211,238,0.55);
+  }
+  .pet-helper .emo { font-size: 1.3rem; }
+
+  .big-click-btn {
+    width: 192px;
+    height: 192px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 25%, #9b82ff, #5b3df5 65%, #3720ad);
+    border: 4px solid rgba(255,255,255,0.22);
+    box-shadow: 0 14px 36px rgba(91, 61, 245, 0.45), inset 0 4px 14px rgba(255,255,255,0.35);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 1.2rem;
+    font-weight: 900;
+    letter-spacing: 0.5px;
+    position: relative;
+  }
+  .big-click-btn:active { transform: scale(0.94); }
+  .big-click-btn small { font-size: 0.76rem; font-weight: 600; color: #e0f2fe; }
+
+  .float-text {
+    position: absolute;
+    pointer-events: none;
+    font-weight: 900;
+    font-size: 1rem;
+    color: var(--gold);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.75);
+    animation: floatUp 0.75s ease-out forwards;
+  }
+  .float-text.crit { color: var(--pink); font-size: 1.2rem; }
+  @keyframes floatUp {
+    0% { opacity: 1; transform: translate(-50%, 0) scale(0.95); }
+    100% { opacity: 0; transform: translate(-50%, -64px) scale(1.12); }
+  }
+
+  /* Grids & Cards */
+  .shop-grid, .pets-grid, .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 11px;
+  }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .card h3 { margin: 0 0 4px; font-size: 0.98rem; }
+  .card p { margin: 0; font-size: 0.81rem; color: var(--muted); }
+
+  /* Case Roulette */
+  .roulette-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 15px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .roulette-window {
+    position: relative;
+    height: 110px;
+    background: var(--input-bg);
+    border: 2px solid rgba(124,92,255,0.45);
+    border-radius: 14px;
+    overflow: hidden;
+    margin: 10px 0;
+  }
+  .roulette-pointer {
+    position: absolute;
+    top: 0; bottom: 0; left: 50%;
+    width: 3px;
+    background: var(--gold);
+    transform: translateX(-50%);
+    z-index: 5;
+    box-shadow: 0 0 12px var(--gold);
+  }
+  .roulette-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    gap: 10px;
+    padding: 0 12px;
+    will-change: transform;
+  }
+  .r-card {
+    min-width: 104px;
+    height: 86px;
+    border-radius: 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+  }
+  .r-card span.emo { font-size: 1.65rem; }
+  .rarity-common { border-color: rgba(154,163,199,0.45); color: #cbd5e1; }
+  .rarity-rare { border-color: rgba(56,189,248,0.65); color: #7dd3fc; }
+  .rarity-epic { border-color: rgba(192,132,252,0.75); color: #e9d5ff; }
+  .rarity-mythic { border-color: rgba(251,191,36,0.85); color: #fde68a; }
+
+  /* World Leaderboard */
+  .lb-header {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 15px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .lb-sort-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .lb-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .lb-row {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 11px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .lb-row.me {
+    border-color: var(--accent-2);
+    background: linear-gradient(90deg, rgba(34,211,238,0.12), var(--panel));
+  }
+  .lb-row.top1 { border-color: rgba(251,191,36,0.65); }
+  .lb-row.top2 { border-color: rgba(226,232,240,0.55); }
+  .lb-row.top3 { border-color: rgba(217,119,6,0.55); }
+  .lb-left { display: flex; align-items: center; gap: 11px; min-width: 0; }
+  .lb-rank {
+    width: 34px; text-align: center; font-weight: 900; font-size: 1rem; flex-shrink: 0;
+  }
+  .lb-avatar {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--panel-2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; flex-shrink: 0;
+  }
+  .lb-user { min-width: 0; }
+  .lb-name {
+    font-weight: 800; font-size: 0.94rem;
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  }
+  .lb-meta { font-size: 0.75rem; color: var(--muted); }
+  .lb-score { text-align: right; flex-shrink: 0; }
+  .lb-score strong { display: block; font-size: 1.05rem; color: var(--gold); }
+  .lb-score span { font-size: 0.72rem; color: var(--muted); }
+
+  /* Auth & Account */
+  .auth-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+  .form-group { margin-bottom: 13px; }
+  .form-group label { display: block; font-size: 0.82rem; color: var(--muted); margin-bottom: 5px; }
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 11px 13px;
+    color: var(--text);
+    font-size: 0.95rem;
+    outline: none;
+    user-select: text;
+  }
+  input[type="text"]:focus, input[type="password"]:focus {
+    border-color: var(--accent-2);
+  }
+  .avatar-picker {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 7px;
+  }
+  .av-opt {
+    background: var(--input-bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 0;
+    font-size: 1.45rem;
+    text-align: center;
+    cursor: pointer;
+  }
+  .av-opt.selected {
+    border-color: var(--accent-2);
+    background: var(--panel-2);
+    transform: scale(1.06);
+  }
+
+  /* Output Textarea */
+  .output-box {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 13px;
+    margin-top: 12px;
+  }
+  textarea {
+    width: 100%;
+    min-height: 92px;
+    background: var(--input-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.8rem;
+    resize: vertical;
+    user-select: text;
+  }
+
+  /* Chat Box */
+  .chat-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .chat-channels {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chat-messages {
+    height: 320px;
+    overflow-y: auto;
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 11px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    user-select: text;
+  }
+  .chat-msg {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 11px;
+    max-width: 86%;
+    align-self: flex-start;
+  }
+  .chat-msg.mine {
+    align-self: flex-end;
+    border-color: rgba(34,211,238,0.5);
+    background: linear-gradient(135deg, rgba(124,92,255,0.16), rgba(34,211,238,0.12));
+  }
+  .chat-msg-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--muted);
+    margin-bottom: 3px;
+  }
+  .chat-msg-author { font-weight: 800; color: var(--accent-2); }
+  .chat-msg-text {
+    font-size: 0.88rem;
+    line-height: 1.38;
+    word-break: break-word;
+    white-space: pre-wrap;
+  }
+  .chat-form {
+    display: flex;
+    gap: 8px;
+  }
+
+  /* Modal & Toast */
+  .modal-backdrop {
+    position: fixed; inset: 0;
+    background: rgba(5, 8, 18, 0.78);
+    display: none; align-items: center; justify-content: center;
+    padding: 16px; z-index: 80;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal-box {
+    background: var(--panel);
+    border: 1px solid rgba(255,255,255,0.16);
+    border-radius: 20px;
+    padding: 20px;
+    max-width: 420px;
+    width: 100%;
+  }
+  .code-fallback-area {
+    width: 100%;
+    min-height: 150px;
+    margin: 10px 0 12px;
+    background: var(--input-bg);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 10px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.76rem;
+    resize: vertical;
+    user-select: text;
+  }
+  .toast {
+    position: fixed;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%) translateY(14px);
+    background: #1e293b;
+    color: #fff;
+    border: 1px solid rgba(34,211,238,0.5);
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    opacity: 0;
+    transition: all 0.2s ease;
+    pointer-events: none;
+    z-index: 99;
+    white-space: nowrap;
+    max-width: 92vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+<div class="app">
+  <!-- PWA Install Banner -->
+  <div class="pwa-banner" id="pwaBanner">
+    <div class="pwa-info">
+      <div class="pwa-icon">🐾</div>
+      <div>
+        <strong>Установи «Онининони Кликер» как приложение</strong>
+        <div style="font-size:0.78rem; color:var(--muted);">Полноэкранный режим без адресной строки и офлайн-режим</div>
+      </div>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <button id="installAppBtn" class="cyan">📲 Установить приложение</button>
+      <button id="dismissBannerBtn" style="padding:8px 10px;">✕</button>
+    </div>
+  </div>
+
+  <!-- Top Header -->
+  <div class="topbar">
+    <div class="title-wrap">
+      <h1>Онининони Кликер ×10 000</h1>
+      <div class="status-line">
+        <span class="net-dot" id="netDot"></span>
+        <span id="netStatusText">Онлайн • Облако подключено</span>
+      </div>
+    </div>
+    <div class="top-actions">
+      <div class="profile-chip" id="headerProfileBtn" title="Открыть профиль и регистрацию">
+        <span id="headerAvatar">🐹</span>
+        <span id="headerNickname">Гость</span>
+      </div>
+      <button id="themeToggleBtn" title="Сменить тёмную или светлую тему">🌙</button>
+      <button id="soundToggleBtn">🔊</button>
+      <button id="downloadAppFileBtn" title="Скачать игру файлом .html">💾 Файл</button>
+      <button id="syncNowBtn" class="primary" title="Отправить рекорд в топ мира">☁️ В топ</button>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-label">Всего «онининони»</div>
+      <div class="stat-value" id="totalCount">0</div>
+      <div class="stat-sub" id="goalStatus">Цель: 10 000</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">За 1 клик</div>
+      <div class="stat-value" id="perClickStat">1</div>
+      <div class="stat-sub" id="critStat">Крит ×3: 5%</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Автоклик / сек</div>
+      <div class="stat-value" id="perSecStat">0</div>
+      <div class="stat-sub" id="equippedCountStat">В бою: 0 / 4</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Место в мире</div>
+      <div class="stat-value" id="worldRankStat">—</div>
+      <div class="stat-sub" id="uniquePetsStat">Питомцев: 0 / 12</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Перерождения</div>
+      <div class="stat-value" id="rebirthCountStat">♻️ 0</div>
+      <div class="stat-sub" id="rebirthBonusStat">Бонус: ×1.0</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Серия захода</div>
+      <div class="stat-value" id="streakCountStat">🔥 0 дн.</div>
+      <div class="stat-sub" id="streakBonusStat">Серия: +0%</div>
+    </div>
+  </div>
+
+  <!-- Progress Bar -->
+  <div class="progress-box">
+    <div class="progress-head">
+      <span id="progressGoalLabel">Прогресс к цели: 10 000</span>
+      <span id="progressPct">0%</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+
+  <div class="rebirth-banner" id="rebirthBanner">
+    <div>
+      <strong id="rebirthBannerTitle">♻️ Перерождение доступно с 10 000 «онининони»</strong>
+      <span id="rebirthBannerDesc">Следующая цель: 10 000 • Каждое перерождение даёт постоянный множитель</span>
+    </div>
+    <button class="gold" id="doRebirthBtn" disabled>♻️ Переродиться</button>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="clickTab"><span>⚡</span><span>Кликер</span></button>
+    <button class="tab-btn" data-tab="casesTab"><span>🎁</span><span>Кейсы</span></button>
+    <button class="tab-btn" data-tab="petsTab"><span>🐾</span><span>Питомцы</span></button>
+    <button class="tab-btn" data-tab="shopTab"><span>🛒</span><span>Магазин</span></button>
+    <button class="tab-btn" data-tab="worldTab"><span>🏆</span><span>Топы</span></button>
+    <button class="tab-btn" data-tab="chatTab"><span>💬</span><span>Чат</span></button>
+  </div>
+
+  <!-- TAB 1: CLICKER -->
+  <div class="tab-panel active" id="clickTab">
+    <div class="click-arena" id="arena">
+      <div class="equipped-strip" id="equippedStrip"></div>
+      <button class="big-click-btn" id="mainClickBtn">
+        <span>ОНИНИНОНИ!</span>
+        <small id="btnBonusLabel">+1 за клик</small>
+      </button>
+    </div>
+
+    <div class="output-box">
+      <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; margin-bottom:8px;">
+        <strong style="font-size:0.86rem;">Текст «онининони» (до 10 000 повторов)</strong>
+        <div style="display:flex; gap:6px;">
+          <button id="copyTextBtn">📋 Копировать</button>
+          <button id="downloadTxtBtn">📄 .txt</button>
+        </div>
+      </div>
+      <textarea id="textPreview" readonly placeholder="Нажимай на кнопку, чтобы копить «онининони»..."></textarea>
+    </div>
+  </div>
+
+  <!-- TAB 2: CASES -->
+  <div class="tab-panel" id="casesTab">
+    <div class="roulette-box">
+      <strong id="rouletteStatus">Выбери кейс ниже, чтобы крутить рулетку питомцев</strong>
+      <div class="roulette-window">
+        <div class="roulette-pointer"></div>
+        <div class="roulette-track" id="rouletteTrack"></div>
+      </div>
+      <div id="lastDropInfo" style="font-size:0.88rem; color:var(--gold); min-height:20px;"></div>
+    </div>
+    <div class="cases-grid" id="casesGrid"></div>
+  </div>
+
+  <!-- TAB 3: PETS -->
+  <div class="tab-panel" id="petsTab">
+    <p style="margin:0 0 10px; color:var(--muted); font-size:0.84rem;">
+      Выбери до <strong>4 питомцев</strong> — они встанут над кнопкой и будут усиливать каждый клик. Дубликаты повышают ★ уровень!
+    </p>
+    <div class="pets-grid" id="petsGrid"></div>
+  </div>
+
+  <!-- TAB 4: SHOP -->
+  <div class="tab-panel" id="shopTab">
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+
+  <!-- TAB 5: WORLD LEADERBOARD & ACCOUNT -->
+  <div class="tab-panel" id="worldTab">
+    <div class="lb-header">
+      <div>
+        <strong style="font-size:1.05rem;">🌍 Мировой рейтинг игроков</strong>
+        <div style="font-size:0.8rem; color:var(--muted);" id="lbSubtitle">Загрузка таблицы лидеров...</div>
+      </div>
+      <div style="display:flex; gap:8px;">
+        <button id="openAccountBtn" class="primary">👤 Аккаунт / Ник</button>
+        <button id="refreshLbBtn">🔄 Обновить</button>
+      </div>
+    </div>
+
+    <div class="lb-sort-bar">
+      <button class="primary" data-sort="score" id="sortScoreBtn">🔥 По «онининони»</button>
+      <button data-sort="streak" id="sortStreakBtn">📅 По серии дней</button>
+      <button data-sort="rebirths" id="sortRebirthsBtn">♻️ По перерождениям</button>
+      <button data-sort="petPower" id="sortPetsBtn">🐾 По силе питомцев</button>
+      <button data-sort="cases" id="sortCasesBtn">🎁 По кейсам</button>
+    </div>
+
+    <div class="lb-list" id="leaderboardList"></div>
+  </div>
+
+  <!-- TAB 6: GLOBAL & TRADE CHAT -->
+  <div class="tab-panel" id="chatTab">
+    <div class="chat-card">
+      <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:8px;">
+        <div>
+          <strong style="font-size:1.02rem;">💬 Чат игроков «Онининони»</strong>
+          <div style="font-size:0.78rem; color:var(--muted);" id="chatRoomSubtitle">Общий канал • Общайся и делись дропом</div>
+        </div>
+        <div class="chat-channels">
+          <button class="primary" data-room="global" id="roomGlobalBtn">🌍 Общий</button>
+          <button data-room="flex" id="roomFlexBtn">🐾 Дроп и питомцы</button>
+          <button data-room="help" id="roomHelpBtn">💡 Советы</button>
+        </div>
+      </div>
+
+      <div class="chat-messages" id="chatMessagesBox"></div>
+
+      <div class="chat-form">
+        <input type="text" id="chatInput" maxlength="240" placeholder="Напиши сообщение в чат...">
+        <button id="shareFlexBtn" title="Похвастаться счётом в чате">📊</button>
+        <button id="sendChatBtn" class="primary">➤</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Install Instructions Modal (for iOS / browsers without direct prompt) -->
+<div class="modal-backdrop" id="installHelpModal">
+  <div class="modal-box">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <h3 style="margin:0;">📲 Как установить приложение</h3>
+      <button id="closeInstallHelpBtn" style="padding:6px 10px;">✕</button>
+    </div>
+    <p style="font-size:0.86rem; color:var(--muted); line-height:1.45; margin-bottom:12px;">
+      Чтобы игра открывалась как полноценное приложение с иконкой на главном экране и без адресной строки:
+    </p>
+    <ul style="font-size:0.84rem; color:var(--text); padding-left:18px; line-height:1.55; margin:0 0 14px;">
+      <li><strong>Android (Chrome / Edge):</strong> нажми <strong>⋮</strong> в правом верхнем углу → <strong>«Установить приложение»</strong> или <strong>«Добавить на главный экран»</strong>.</li>
+      <li><strong>iPhone / iPad (Safari):</strong> нажми кнопку <strong>«Поделиться»</strong> (квадрат со стрелкой вверх) → <strong>«На экран „Домой“»</strong>.</li>
+      <li><strong>ПК (Chrome / Edge):</strong> нажми значок установки <strong>⊕</strong> в правой части адресной строки.</li>
+    </ul>
+    <button id="okInstallHelpBtn" class="primary" style="width:100%;">Понятно!</button>
+  </div>
+</div>
+
+<!-- Account / Registration Modal -->
+<div class="modal-backdrop" id="accountModal">
+  <div class="modal-box">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <h3 style="margin:0;" id="authModalTitle">👤 Регистрация в Топах мира</h3>
+      <button id="closeAccountModalBtn" style="padding:6px 10px;">✕</button>
+    </div>
+    <p style="font-size:0.82rem; color:var(--muted); margin:0 0 12px;">
+      Создай аккаунт с ником и PIN-кодом, чтобы сохранять прогресс при перезаходе, писать в чат и попасть в Топы мира.
+    </p>
+    <div class="form-group">
+      <label for="regNicknameInput">Никнейм игрока</label>
+      <input type="text" id="regNicknameInput" maxlength="18" placeholder="Например: OniMaster">
+    </div>
+    <div class="form-group">
+      <label for="regPinInput">PIN-код (4–8 цифр)</label>
+      <input type="password" id="regPinInput" maxlength="12" placeholder="Например: 1234">
+    </div>
+    <div class="form-group">
+      <label>Выбери аватар</label>
+      <div class="avatar-picker" id="avatarPicker"></div>
+    </div>
+    <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:14px;">
+      <button id="saveAccountBtn" class="primary" style="flex:1;">Сохранить / Создать</button>
+      <button id="loginExistingBtn" style="flex:1;">Войти</button>
+    </div>
+    <button id="resetProgressBtn" style="width:100%; margin-top:10px; color:var(--red);">🔄 Сбросить локальный счёт</button>
+  </div>
+</div>
+
+<!-- File Export Fallback Modal -->
+<div class="modal-backdrop" id="fileExportModal">
+  <div class="modal-box">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h3 style="margin:0;">💾 Сохранение файла игры</h3>
+      <button id="closeFileExportModalBtn" style="padding:6px 10px;">✕</button>
+    </div>
+    <p style="font-size:0.83rem; color:var(--muted); margin:0 0 8px; line-height:1.42;">
+      Если браузер заблокировал автоскачивание (часто бывает при открытии через <code>content://</code>), скопируй код ниже и сохрани как <code>oninononi_clicker_world.html</code>.
+    </p>
+    <textarea id="fileExportCodeArea" class="code-fallback-area" readonly></textarea>
+    <div style="display:flex; gap:8px;">
+      <button id="copyFileCodeBtn" class="primary" style="flex:1;">📋 Скопировать код</button>
+      <button id="retryDirectDownloadBtn" style="flex:1;">⬇️ Повторить</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, getDoc, addDoc, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+/* =========================================================
+   1. DYNAMIC PWA MANIFEST & SERVICE WORKER (OFFLINE APP)
+   ========================================================= */
+(function setupPWA() {
+  try {
+    const svgIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+      <defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#7c5cff"/><stop offset="100%" stop-color="#22d3ee"/>
+      </linearGradient></defs>
+      <rect width="512" height="512" rx="115" fill="url(#g)"/>
+      <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="250">🐾</text>
+    </svg>`;
+    const iconUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgIcon);
+
+    const appleIcon = document.createElement('link');
+    appleIcon.rel = 'apple-touch-icon';
+    appleIcon.href = iconUrl;
+    document.head.appendChild(appleIcon);
+
+    const manifestObj = {
+      name: 'Онининони Кликер ×10 000: Топы мира',
+      short_name: 'Онининони',
+      description: 'Кликер с кейсами, питомцами и мировым рейтингом',
+      start_url: location.href,
+      display: 'standalone',
+      orientation: 'portrait',
+      background_color: '#0f1221',
+      theme_color: '#0f1221',
+      icons: [
+        { src: iconUrl, sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
+        { src: iconUrl, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+      ]
+    };
+
+    const manifestBlob = new Blob([JSON.stringify(manifestObj)], { type: 'application/manifest+json' });
+    const manifestLink = document.createElement('link');
+    manifestLink.rel = 'manifest';
+    manifestLink.href = URL.createObjectURL(manifestBlob);
+    document.head.appendChild(manifestLink);
+
+    if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.protocol === 'http:')) {
+      const swCode = `
+        const CACHE_NAME = 'oninononi-pwa-v1';
+        self.addEventListener('install', (e) => {
+          self.skipWaiting();
+          e.waitUntil(
+            caches.open(CACHE_NAME).then((cache) => cache.addAll([self.location.href]).catch(() => {}))
+          );
+        });
+        self.addEventListener('activate', (e) => {
+          e.waitUntil(self.clients.claim());
+        });
+        self.addEventListener('fetch', (e) => {
+          if (e.request.method !== 'GET') return;
+          e.respondWith(
+            fetch(e.request).then((res) => {
+              const copy = res.clone();
+              caches.open(CACHE_NAME).then((c) => c.put(e.request, copy)).catch(() => {});
+              return res;
+            }).catch(() => caches.match(e.request))
+          );
+        });
+      `;
+      const swBlob = new Blob([swCode], { type: 'application/javascript' });
+      navigator.serviceWorker.register(URL.createObjectURL(swBlob)).catch(() => {});
+    }
+  } catch (e) {}
+})();
+
+let deferredInstallPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredInstallPrompt = e;
+  document.getElementById('pwaBanner').classList.remove('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  deferredInstallPrompt = null;
+  document.getElementById('pwaBanner').classList.add('hidden');
+  showToast('🎉 Приложение «Онининони» установлено!');
+});
+
+if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+  document.getElementById('pwaBanner').classList.add('hidden');
+}
+
+/* =========================================================
+   2. GAME DATA & STATE
+   ========================================================= */
+const STORAGE_KEY = 'oninononi_pwa_world_v2';
+const BASE_GOAL = 10000;
+const GOAL_STEP = 5000;
+const AVATARS = ['🐹', '🐱', '🦊', '🐼', '🐙', '🦄', '🐉', '👾', '🔥', '👑', '🐸', '🦉'];
+
+const PETS = [
+  { id: 'hamster', name: 'Хомяк-кликер', emoji: '🐹', rarity: 'common', click: 1, dps: 0, crit: 0 },
+  { id: 'squirrel', name: 'Белка-турбо', emoji: '🐿️', rarity: 'common', click: 2, dps: 1, crit: 0 },
+  { id: 'frog', name: 'Лягушка-бас', emoji: '🐸', rarity: 'common', click: 1, dps: 2, crit: 1 },
+  { id: 'cat', name: 'Кот-хакер', emoji: '🐱', rarity: 'rare', click: 4, dps: 3, crit: 2 },
+  { id: 'fox', name: 'Лис-крит', emoji: '🦊', rarity: 'rare', click: 3, dps: 2, crit: 5 },
+  { id: 'owl', name: 'Сова-авто', emoji: '🦉', rarity: 'rare', click: 2, dps: 6, crit: 1 },
+  { id: 'panda', name: 'Панда-мощ', emoji: '🐼', rarity: 'epic', click: 9, dps: 7, crit: 3 },
+  { id: 'octopus', name: 'Осьминог-8рук', emoji: '🐙', rarity: 'epic', click: 12, dps: 10, crit: 4 },
+  { id: 'unicorn', name: 'Единорог-радуга', emoji: '🦄', rarity: 'epic', click: 8, dps: 14, crit: 6 },
+  { id: 'dragon', name: 'Дракон ОНИ', emoji: '🐉', rarity: 'mythic', click: 24, dps: 22, crit: 8 },
+  { id: 'axolotl', name: 'Космо-Аксолотль', emoji: '👾', rarity: 'mythic', click: 20, dps: 30, crit: 10 },
+  { id: 'phoenix', name: 'Феникс ×100', emoji: '🔥', rarity: 'mythic', click: 35, dps: 28, crit: 12 }
+];
+
+const CASES = [
+  { id: 'forest', name: 'Лесной кейс', emoji: '🌲', cost: 50, desc: 'Обычные и редкие зверьки для старта', weights: { common: 75, rare: 22, epic: 3, mythic: 0 } },
+  { id: 'safari', name: 'Кейс джунглей', emoji: '🌴', cost: 350, desc: 'Выше шанс редких и эпических помощников', weights: { common: 35, rare: 42, epic: 20, mythic: 3 } },
+  { id: 'cosmic', name: 'Космо-кейс', emoji: '🌌', cost: 1800, desc: 'Эпики и шанс выбить мифического питомца', weights: { common: 0, rare: 25, epic: 50, mythic: 25 } }
+];
+
+const UPGRADES = [
+  { id: 'glove', name: 'Пружинная лапка', desc: '+1 к базовому клику', baseCost: 15, mult: 1.55, type: 'click', val: 1 },
+  { id: 'mega', name: 'Мега-кнопка', desc: '+5 к базовому клику', baseCost: 120, mult: 1.65, type: 'click', val: 5 },
+  { id: 'auto1', name: 'Мини-маятник', desc: '+2 «онининони» в секунду', baseCost: 40, mult: 1.55, type: 'dps', val: 2 },
+  { id: 'auto2', name: 'ОНИ-генератор', desc: '+12 «онининони» в секунду', baseCost: 300, mult: 1.65, type: 'dps', val: 12 }
+];
+
+const RARITY_LABEL = { common: 'Обычный', rare: 'Редкий', epic: 'Эпический', mythic: 'Мифический' };
+
+let state = {
+  count: 0,
+  rebirths: 0,
+  streak: 0,
+  bestStreak: 0,
+  lastVisitDay: '',
+  baseClick: 1,
+  baseDps: 0,
+  casesOpened: 0,
+  soundOn: true,
+  theme: 'dark',
+  upgrades: { glove: 0, mega: 0, auto1: 0, auto2: 0 },
+  pets: {},
+  equipped: [],
+  account: {
+    registered: false,
+    profileId: '',
+    nickname: 'Гость',
+    avatar: '🐹',
+    pin: ''
+  }
+};
+
+function getDayKey(dateObj = new Date()) {
+  const y = dateObj.getFullYear();
+  const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const d = String(dateObj.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
+function getYesterdayKey() {
+  const dt = new Date();
+  dt.setDate(dt.getDate() - 1);
+  return getDayKey(dt);
+}
+
+function getStreakBonusPercent() {
+  const s = Math.max(0, Number(state.streak) || 0);
+  return Math.min(100, s * 5);
+}
+
+function updateDailyStreakOnOpen() {
+  const today = getDayKey();
+  const yesterday = getYesterdayKey();
+  const prevStreak = Math.max(0, Number(state.streak) || 0);
+
+  if (!state.lastVisitDay) {
+    state.streak = 1;
+    state.bestStreak = Math.max(1, Number(state.bestStreak) || 0);
+    state.lastVisitDay = today;
+    saveState();
+    return { status: 'started', streak: state.streak };
+  }
+
+  if (state.lastVisitDay === today) {
+    state.streak = Math.max(1, prevStreak);
+    state.bestStreak = Math.max(state.streak, Number(state.bestStreak) || 0);
+    return { status: 'same_day', streak: state.streak };
+  }
+
+  if (state.lastVisitDay === yesterday) {
+    state.streak = prevStreak + 1;
+    state.bestStreak = Math.max(state.streak, Number(state.bestStreak) || 0);
+    state.lastVisitDay = today;
+    saveState();
+    return { status: 'continued', streak: state.streak };
+  }
+
+  state.streak = 1;
+  state.bestStreak = Math.max(1, Number(state.bestStreak) || 0);
+  state.lastVisitDay = today;
+  saveState();
+  return { status: 'reset', streak: state.streak, previous: prevStreak };
+}
+
+function getCurrentGoal() {
+  const r = Math.max(0, Number(state.rebirths) || 0);
+  return BASE_GOAL + r * GOAL_STEP;
+}
+
+function getRebirthMultiplier() {
+  const r = Math.max(0, Number(state.rebirths) || 0);
+  return 1 + r * 0.5;
+}
+
+function canRebirth() {
+  return !spinning && Math.floor(state.count) >= getCurrentGoal();
+}
+
+function performRebirth() {
+  const currentGoal = getCurrentGoal();
+  if (Math.floor(state.count) < currentGoal) {
+    showToast(`Нужно набрать ${currentGoal.toLocaleString('ru-RU')} «онининони» для перерождения`);
+    return;
+  }
+  state.rebirths = (Number(state.rebirths) || 0) + 1;
+  state.count = 0;
+  state.baseClick = 1;
+  state.baseDps = 0;
+  state.upgrades = { glove: 0, mega: 0, auto1: 0, auto2: 0 };
+
+  const nextGoal = getCurrentGoal();
+  const nextMult = getRebirthMultiplier().toFixed(1);
+  playTone(523.25, 0.14, 'triangle', 0.08);
+  setTimeout(() => playTone(783.99, 0.2, 'triangle', 0.08), 120);
+  showToast(`♻️ Перерождение #${state.rebirths}! Множитель ×${nextMult}, новая цель: ${nextGoal.toLocaleString('ru-RU')}`);
+  updateUI();
+  saveState();
+  if (state.account.registered) syncProgressToCloud(true);
+}
+
+let spinning = false;
+let audioCtx = null;
+let selectedAvatar = '🐹';
+let lbSortBy = 'score';
+let worldPlayers = [];
+let currentChatRoom = 'global';
+let chatMessages = [];
+let localChatFallback = [];
+let db = null;
+let auth = null;
+let currentUser = null;
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'oninononi-clicker-app';
+
+function getOrCreateLocalProfileId() {
+  if (state.account.profileId) return state.account.profileId;
+  const id = 'plr_' + Math.random().toString(36).slice(2, 10) + Date.now().toString(36);
+  state.account.profileId = id;
+  saveState();
+  return id;
+}
+
+function normalizeNickId(nick) {
+  return 'nick_' + nick.trim().toLowerCase().replace(/[^a-zа-яё0-9_-]/gi, '_');
+}
+
+async function initCloud() {
+  try {
+    if (typeof __firebase_config === 'undefined') {
+      updateNetStatus(false, 'Локальный режим (облако недоступно)');
+      return;
+    }
+    const firebaseConfig = JSON.parse(__firebase_config);
+    const app = initializeApp(firebaseConfig);
+    auth = getAuth(app);
+    db = getFirestore(app);
+
+    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+      const cred = await signInWithCustomToken(auth, __initial_auth_token);
+      currentUser = cred.user;
+    } else {
+      const cred = await signInAnonymously(auth);
+      currentUser = cred.user;
+    }
+
+    if (!currentUser) return;
+    updateNetStatus(navigator.onLine, navigator.onLine ? 'Онлайн • Топы и чат активны' : 'Офлайн • Кэш активен');
+    subscribeWorldLeaderboard();
+    subscribeWorldChat();
+    if (state.account.registered) {
+      await syncProgressToCloud(true);
+    }
+  } catch (err) {
+    updateNetStatus(false, 'Офлайн-режим • Прогресс сохранён локально');
+  }
+}
+
+function subscribeWorldChat() {
+  if (!db || !currentUser) return;
+  const chatCol = collection(db, 'artifacts', appId, 'public', 'data', 'chat_messages');
+  onSnapshot(chatCol, (snap) => {
+    const msgs = [];
+    snap.forEach((d) => {
+      const data = d.data();
+      if (data && data.text) {
+        msgs.push({ id: d.id, ...data });
+      }
+    });
+    msgs.sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+    chatMessages = msgs;
+    renderChatMessages();
+  }, () => {});
+}
+
+async function sendChatMessage(customText = null) {
+  const input = document.getElementById('chatInput');
+  const text = (customText !== null ? customText : input.value).trim();
+  if (!text) return;
+
+  if (!state.account.registered) {
+    openAccountModal();
+    showToast('Укажи никнейм, чтобы писать в чат!');
+    return;
+  }
+
+  if (customText === null) input.value = '';
+  const msgObj = {
+    room: currentChatRoom,
+    profileId: state.account.profileId,
+    nickname: state.account.nickname,
+    avatar: state.account.avatar || '🐹',
+    score: Math.floor(state.count),
+    text: text.slice(0, 240),
+    createdAt: Date.now()
+  };
+
+  if (db && currentUser) {
+    try {
+      const chatCol = collection(db, 'artifacts', appId, 'public', 'data', 'chat_messages');
+      await addDoc(chatCol, msgObj);
+    } catch (e) {
+      localChatFallback.push({ id: 'loc_' + Date.now(), ...msgObj });
+      renderChatMessages();
+      showToast('Сообщение отправлено локально');
+    }
+  } else {
+    localChatFallback.push({ id: 'loc_' + Date.now(), ...msgObj });
+    renderChatMessages();
+    showToast('Нет сети: сообщение видно только тебе');
+  }
+}
+
+function renderChatMessages() {
+  const box = document.getElementById('chatMessagesBox');
+  if (!box) return;
+  const all = [...chatMessages, ...localChatFallback]
+    .filter(m => (m.room || 'global') === currentChatRoom)
+    .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0))
+    .slice(-80);
+
+  box.innerHTML = '';
+  if (all.length === 0) {
+    box.innerHTML = `<div style="text-align:center; color:var(--muted); font-size:0.84rem; margin:auto;">В этом канале пока тихо. Напиши первым!</div>`;
+    return;
+  }
+
+  all.forEach((m) => {
+    const isMine = state.account.registered && m.profileId === state.account.profileId;
+    const dt = m.createdAt ? new Date(m.createdAt) : new Date();
+    const timeStr = dt.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+    const item = document.createElement('div');
+    item.className = 'chat-msg' + (isMine ? ' mine' : '');
+    item.innerHTML = `
+      <div class="chat-msg-head">
+        <span class="chat-msg-author">${m.avatar || '🐹'} ${escapeHtml(m.nickname || 'Игрок')} <span style="color:var(--gold); font-weight:600;">(${(m.score || 0).toLocaleString('ru-RU')})</span></span>
+        <span>${timeStr}</span>
+      </div>
+      <div class="chat-msg-text">${escapeHtml(m.text)}</div>
+    `;
+    box.appendChild(item);
+  });
+  box.scrollTop = box.scrollHeight;
+}
+
+function subscribeWorldLeaderboard() {
+  if (!db || !currentUser) return;
+  const lbCol = collection(db, 'artifacts', appId, 'public', 'data', 'leaderboard');
+  onSnapshot(lbCol, (snap) => {
+    const list = [];
+    snap.forEach((d) => {
+      const data = d.data();
+      if (data && data.nickname) {
+        list.push({ id: d.id, ...data });
+      }
+    });
+    worldPlayers = list;
+    renderLeaderboard();
+  }, (err) => {
+    document.getElementById('lbSubtitle').textContent = 'Не удалось загрузить таблицу лидеров';
+  });
+}
+
+function calcTotalPetPower() {
+  let totalLevels = 0;
+  for (const id of Object.keys(state.pets)) {
+    totalLevels += state.pets[id] || 0;
+  }
+  return totalLevels;
+}
+
+async function syncProgressToCloud(silent = false) {
+  if (!db || !currentUser) {
+    if (!silent) showToast('Нет подключения к облаку — прогресс сохранён локально');
+    return;
+  }
+  if (!state.account.registered) {
+    if (!silent) {
+      openAccountModal();
+      showToast('Зарегистрируйся, чтобы попасть в Топы мира!');
+    }
+    return;
+  }
+  try {
+    const docId = state.account.profileId || normalizeNickId(state.account.nickname);
+    const ref = doc(db, 'artifacts', appId, 'public', 'data', 'leaderboard', docId);
+    const payload = {
+      nickname: state.account.nickname,
+      avatar: state.account.avatar,
+      pin: state.account.pin || '',
+      score: Math.floor(state.count),
+      rebirths: Number(state.rebirths) || 0,
+      streak: Number(state.streak) || 0,
+      bestStreak: Number(state.bestStreak) || 0,
+      petPower: calcTotalPetPower(),
+      uniquePets: Object.keys(state.pets).length,
+      cases: state.casesOpened,
+      saveData: JSON.stringify({
+        count: Math.floor(state.count),
+        rebirths: Number(state.rebirths) || 0,
+        streak: Number(state.streak) || 0,
+        bestStreak: Number(state.bestStreak) || 0,
+        lastVisitDay: state.lastVisitDay || getDayKey(),
+        baseClick: state.baseClick,
+        baseDps: state.baseDps,
+        casesOpened: state.casesOpened,
+        upgrades: state.upgrades,
+        pets: state.pets,
+        equipped: state.equipped
+      }),
+      updatedAt: Date.now()
+    };
+    await setDoc(ref, payload, { merge: true });
+    if (!silent) showToast('☁️ Рекорд обновлён в Топах мира!');
+  } catch (e) {
+    if (!silent) showToast('Ошибка синхронизации — попробуй позже');
+  }
+}
+
+async function registerOrSaveAccount() {
+  const nick = document.getElementById('regNicknameInput').value.trim();
+  const pin = document.getElementById('regPinInput').value.trim();
+
+  if (nick.length < 2 || nick.length > 18) {
+    showToast('Ник должен быть от 2 до 18 символов');
+    return;
+  }
+  if (pin.length < 4) {
+    showToast('Придумай PIN-код от 4 до 8 цифр');
+    return;
+  }
+
+  const targetId = normalizeNickId(nick);
+  if (db && currentUser) {
+    try {
+      const existingRef = doc(db, 'artifacts', appId, 'public', 'data', 'leaderboard', targetId);
+      const existingSnap = await getDoc(existingRef);
+      if (existingSnap.exists()) {
+        const data = existingSnap.data();
+        if (data.pin && data.pin !== pin) {
+          showToast('❌ Этот ник занят! Введи верный PIN или выбери другой ник');
+          return;
+        }
+      }
+    } catch (e) {}
+  }
+
+  state.account = {
+    registered: true,
+    profileId: targetId,
+    nickname: nick,
+    avatar: selectedAvatar,
+    pin
+  };
+  saveState();
+  updateUI();
+  closeAccountModal();
+  await syncProgressToCloud(false);
+}
+
+async function loginExistingAccount() {
+  const nick = document.getElementById('regNicknameInput').value.trim();
+  const pin = document.getElementById('regPinInput').value.trim();
+  if (!nick || !pin) {
+    showToast('Введи ник и PIN-код своего аккаунта');
+    return;
+  }
+  if (!db || !currentUser) {
+    showToast('Для входа в аккаунт нужен интернет');
+    return;
+  }
+  try {
+    const targetId = normalizeNickId(nick);
+    const snap = await getDoc(doc(db, 'artifacts', appId, 'public', 'data', 'leaderboard', targetId));
+    if (!snap.exists()) {
+      showToast('Аккаунт с таким ником не найден');
+      return;
+    }
+    const data = snap.data();
+    if (data.pin && data.pin !== pin) {
+      showToast('❌ Неверный PIN-код');
+      return;
+    }
+    state.account = {
+      registered: true,
+      profileId: targetId,
+      nickname: data.nickname,
+      avatar: data.avatar || '🐹',
+      pin: data.pin || pin
+    };
+    if (data.saveData) {
+      const parsed = JSON.parse(data.saveData);
+      state.count = Math.max(state.count, parsed.count || 0);
+      state.rebirths = Math.max(state.rebirths || 0, parsed.rebirths || 0);
+      state.streak = Math.max(state.streak || 0, parsed.streak || 0);
+      state.bestStreak = Math.max(state.bestStreak || 0, parsed.bestStreak || state.streak || 0);
+      if (parsed.lastVisitDay && parsed.lastVisitDay > (state.lastVisitDay || '')) {
+        state.lastVisitDay = parsed.lastVisitDay;
+      }
+      state.baseClick = Math.max(state.baseClick, parsed.baseClick || 1);
+      state.baseDps = Math.max(state.baseDps, parsed.baseDps || 0);
+      state.casesOpened = Math.max(state.casesOpened, parsed.casesOpened || 0);
+      state.upgrades = { ...state.upgrades, ...(parsed.upgrades || {}) };
+      state.pets = { ...state.pets, ...(parsed.pets || {}) };
+      if (Array.isArray(parsed.equipped) && parsed.equipped.length) {
+        state.equipped = parsed.equipped.slice(0, 4);
+      }
+    }
+    saveState();
+    updateUI();
+    closeAccountModal();
+    showToast(`🎉 С возвращением, ${state.account.nickname}!`);
+  } catch (e) {
+    showToast('Ошибка при входе в аккаунт');
+  }
+}
+
+/* =========================================================
+   4. LOCAL STORAGE, AUDIO & GAMEPLAY MECHANICS
+   ========================================================= */
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      state = {
+        ...state,
+        ...parsed,
+        upgrades: { ...state.upgrades, ...(parsed.upgrades || {}) },
+        pets: parsed.pets || {},
+        equipped: Array.isArray(parsed.equipped) ? parsed.equipped.slice(0, 4) : [],
+        account: { ...state.account, ...(parsed.account || {}) }
+      };
+    }
+  } catch (e) {}
+  getOrCreateLocalProfileId();
+  selectedAvatar = state.account.avatar || '🐹';
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+function updateNetStatus(online, text) {
+  const dot = document.getElementById('netDot');
+  const label = document.getElementById('netStatusText');
+  dot.classList.toggle('offline', !online);
+  label.textContent = text;
+}
+
+window.addEventListener('online', () => {
+  updateNetStatus(true, 'Онлайн • Синхронизация...');
+  syncProgressToCloud(true);
+});
+window.addEventListener('offline', () => {
+  updateNetStatus(false, 'Офлайн • Игра работает без сети');
+});
+
+function showToast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => el.classList.remove('show'), 2300);
+}
+
+function playTone(freq = 440, duration = 0.06, type = 'sine', gainVal = 0.06) {
+  if (!state.soundOn) return;
+  try {
+    if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    if (audioCtx.state === 'suspended') audioCtx.resume();
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+    gain.gain.setValueAtTime(gainVal, audioCtx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  } catch (e) {}
+}
+
+function petStats(pet, level) {
+  const scale = 1 + (level - 1) * 0.45;
+  return {
+    click: Math.round(pet.click * scale),
+    dps: Math.round(pet.dps * scale),
+    crit: Math.min(60, pet.crit + (level - 1) * 2)
+  };
+}
+
+function getBonuses() {
+  let petClick = 0;
+  let petDps = 0;
+  let critChance = 5;
+  for (const id of state.equipped) {
+    const lvl = state.pets[id] || 0;
+    const pet = PETS.find(p => p.id === id);
+    if (pet && lvl > 0) {
+      const s = petStats(pet, lvl);
+      petClick += s.click;
+      petDps += s.dps;
+      critChance += s.crit;
+    }
+  }
+  const mult = getRebirthMultiplier();
+  const streakMult = 1 + getStreakBonusPercent() / 100;
+  const totalMult = mult * streakMult;
+  return {
+    click: Math.max(1, Math.round((state.baseClick + petClick) * totalMult)),
+    dps: Math.round((state.baseDps + petDps) * totalMult),
+    critChance: Math.min(75, critChance),
+    mult: totalMult
+  };
+}
+
+function spawnFloat(text, isCrit = false) {
+  const arena = document.getElementById('arena');
+  const el = document.createElement('div');
+  el.className = 'float-text' + (isCrit ? ' crit' : '');
+  el.textContent = text;
+  el.style.left = (30 + Math.random() * 40) + '%';
+  el.style.top = (45 + Math.random() * 25) + '%';
+  arena.appendChild(el);
+  setTimeout(() => el.remove(), 760);
+}
+
+function bumpPets() {
+  document.querySelectorAll('.pet-helper').forEach(el => {
+    el.classList.remove('bump');
+    void el.offsetWidth;
+    el.classList.add('bump');
+  });
+}
+
+function doClick() {
+  const b = getBonuses();
+  const isCrit = Math.random() * 100 < b.critChance;
+  const gained = isCrit ? b.click * 3 : b.click;
+  state.count += gained;
+  spawnFloat(isCrit ? `КРИТ +${gained}!` : `+${gained}`, isCrit);
+  bumpPets();
+  playTone(isCrit ? 760 : 420 + Math.random() * 90, isCrit ? 0.12 : 0.05, isCrit ? 'triangle' : 'sine', 0.06);
+  updateUI();
+  saveState();
+}
+
+function getUpgradeCost(upg) {
+  const lvl = state.upgrades[upg.id] || 0;
+  return Math.round(upg.baseCost * Math.pow(upg.mult, lvl));
+}
+
+function buyUpgrade(id) {
+  const upg = UPGRADES.find(u => u.id === id);
+  if (!upg) return;
+  const cost = getUpgradeCost(upg);
+  if (state.count < cost) return;
+  state.count -= cost;
+  state.upgrades[id] = (state.upgrades[id] || 0) + 1;
+  if (upg.type === 'click') state.baseClick += upg.val;
+  if (upg.type === 'dps') state.baseDps += upg.val;
+  playTone(580, 0.09, 'triangle', 0.07);
+  showToast(`Куплено: ${upg.name}`);
+  updateUI();
+  saveState();
+}
+
+function pickWeightedRarity(weights) {
+  const entries = Object.entries(weights).filter(([, w]) => w > 0);
+  const total = entries.reduce((acc, [, w]) => acc + w, 0);
+  let r = Math.random() * total;
+  for (const [rar, w] of entries) {
+    r -= w;
+    if (r <= 0) return rar;
+  }
+  return entries[0][0];
+}
+
+function rollPetByRarity(rarity) {
+  const pool = PETS.filter(p => p.rarity === rarity);
+  return pool[Math.floor(Math.random() * pool.length)] || PETS[0];
+}
+
+function openCase(caseObj) {
+  if (spinning || state.count < caseObj.cost) return;
+  spinning = true;
+  state.count -= caseObj.cost;
+  state.casesOpened += 1;
+  updateUI();
+  saveState();
+
+  const winnerRarity = pickWeightedRarity(caseObj.weights);
+  const winnerPet = rollPetByRarity(winnerRarity);
+
+  const track = document.getElementById('rouletteTrack');
+  const statusEl = document.getElementById('rouletteStatus');
+  const dropEl = document.getElementById('lastDropInfo');
+  statusEl.textContent = `Открываем «${caseObj.name}»...`;
+  dropEl.textContent = '';
+
+  const totalCards = 36;
+  const winIndex = 29;
+  track.style.transition = 'none';
+  track.style.transform = 'translateX(0px)';
+  track.innerHTML = '';
+
+  for (let i = 0; i < totalCards; i++) {
+    const p = i === winIndex ? winnerPet : rollPetByRarity(pickWeightedRarity(caseObj.weights));
+    const card = document.createElement('div');
+    card.className = `r-card rarity-${p.rarity}`;
+    card.innerHTML = `<span class="emo">${p.emoji}</span><strong>${p.name}</strong>`;
+    track.appendChild(card);
+  }
+
+  const cardStep = 114;
+  const winCenter = winIndex * cardStep + 52;
+  const jitter = Math.round((Math.random() - 0.5) * 34);
+
+  let tickCount = 0;
+  const tickInterval = setInterval(() => {
+    tickCount++;
+    playTone(300 + (tickCount % 8) * 45, 0.03, 'square', 0.025);
+  }, 110);
+
+  requestAnimationFrame(() => {
+    const winW = track.parentElement.clientWidth;
+    const targetX = -(winCenter - winW / 2 + jitter);
+    track.style.transition = 'transform 3.1s cubic-bezier(0.12, 0.85, 0.22, 1)';
+    track.style.transform = `translateX(${targetX}px)`;
+  });
+
+  setTimeout(() => {
+    clearInterval(tickInterval);
+    const prevLvl = state.pets[winnerPet.id] || 0;
+    const newLvl = prevLvl + 1;
+    state.pets[winnerPet.id] = newLvl;
+
+    let autoEquipMsg = '';
+    if (prevLvl === 0 && state.equipped.length < 4) {
+      state.equipped.push(winnerPet.id);
+      autoEquipMsg = ' • В команде!';
+    }
+
+    const dupText = prevLvl === 0
+      ? `Новый питомец! (${RARITY_LABEL[winnerPet.rarity]})${autoEquipMsg}`
+      : `Дубликат! Уровень повышен до ★${newLvl}`;
+
+    statusEl.textContent = 'Кейс открыт!';
+    dropEl.textContent = `${winnerPet.emoji} ${winnerPet.name} — ${dupText}`;
+    playTone(660, 0.14, 'triangle', 0.08);
+    setTimeout(() => playTone(880, 0.18, 'triangle', 0.08), 110);
+
+    spinning = false;
+    updateUI();
+    saveState();
+    if (state.account.registered) syncProgressToCloud(true);
+  }, 3200);
+}
+
+function toggleEquip(petId) {
+  if (!state.pets[petId]) return;
+  const idx = state.equipped.indexOf(petId);
+  if (idx >= 0) {
+    state.equipped.splice(idx, 1);
+    showToast('Питомец убран из команды');
+  } else {
+    if (state.equipped.length >= 4) {
+      showToast('Максимум 4 питомца! Сначала сними одного');
+      return;
+    }
+    state.equipped.push(petId);
+    showToast('Питомец добавлен в команду!');
+  }
+  updateUI();
+  saveState();
+  if (state.account.registered) syncProgressToCloud(true);
+}
+
+function buildOninononiText(maxRepeats = getCurrentGoal()) {
+  const actual = Math.min(Math.floor(state.count), maxRepeats);
+  if (actual <= 0) return '';
+  return Array(actual).fill('онининони').join(' ');
+}
+
+/* =========================================================
+   5. RENDERING UI & WORLD LEADERBOARD
+   ========================================================= */
+function renderLeaderboard() {
+  const listEl = document.getElementById('leaderboardList');
+  const subEl = document.getElementById('lbSubtitle');
+  const rankStatEl = document.getElementById('worldRankStat');
+
+  const combined = [...worldPlayers];
+  if (state.account.registered) {
+    const myId = state.account.profileId;
+    const idx = combined.findIndex(p => p.id === myId);
+    const myEntry = {
+      id: myId,
+      nickname: state.account.nickname,
+      avatar: state.account.avatar,
+      score: Math.floor(state.count),
+      rebirths: Number(state.rebirths) || 0,
+      streak: Number(state.streak) || 0,
+      petPower: calcTotalPetPower(),
+      uniquePets: Object.keys(state.pets).length,
+      cases: state.casesOpened
+    };
+    if (idx >= 0) combined[idx] = { ...combined[idx], ...myEntry };
+    else combined.push(myEntry);
+  }
+
+  combined.sort((a, b) => {
+    const diff = (b[lbSortBy] || 0) - (a[lbSortBy] || 0);
+    if (diff !== 0) return diff;
+    return ((b.streak || 0) * 10000000 + (b.rebirths || 0) * 1000000 + (b.score || 0)) -
+           ((a.streak || 0) * 10000000 + (a.rebirths || 0) * 1000000 + (a.score || 0));
+  });
+
+  if (state.account.registered) {
+    const myPos = combined.findIndex(p => p.id === state.account.profileId);
+    rankStatEl.textContent = myPos >= 0 ? `#${myPos + 1}` : '—';
+  } else {
+    rankStatEl.textContent = 'Гость';
+  }
+
+  subEl.textContent = `Участников в рейтинге: ${combined.length}`;
+  listEl.innerHTML = '';
+
+  if (combined.length === 0) {
+    listEl.innerHTML = `<div class="card"><p style="text-align:center;">Пока никого нет в рейтинге. Зарегистрируйся и стань №1 в мире!</p></div>`;
+    return;
+  }
+
+  combined.slice(0, 50).forEach((plr, idx) => {
+    const rank = idx + 1;
+    const isMe = state.account.registered && plr.id === state.account.profileId;
+    const medal = rank === 1 ? '🥇' : rank === 2 ? '🥈' : rank === 3 ? '🥉' : `#${rank}`;
+    const topCls = rank <= 3 ? `top${rank}` : '';
+    const rCount = plr.rebirths || 0;
+    const sCount = plr.streak || 0;
+
+    let mainVal = (plr.score || 0).toLocaleString('ru-RU');
+    let subVal = 'онининони';
+    if (lbSortBy === 'streak') {
+      mainVal = `🔥 ${sCount.toLocaleString('ru-RU')} дн.`;
+      subVal = 'серия захода';
+    } else if (lbSortBy === 'rebirths') {
+      mainVal = `♻️ ${rCount.toLocaleString('ru-RU')}`;
+      subVal = `перерождений (×${(1 + rCount * 0.5).toFixed(1)})`;
+    } else if (lbSortBy === 'petPower') {
+      mainVal = `★${plr.petPower || 0}`;
+      subVal = `питомцев: ${plr.uniquePets || 0}/12`;
+    } else if (lbSortBy === 'cases') {
+      mainVal = (plr.cases || 0).toLocaleString('ru-RU');
+      subVal = 'открыто кейсов';
+    }
+
+    const row = document.createElement('div');
+    row.className = `lb-row ${topCls} ${isMe ? 'me' : ''}`;
+    row.innerHTML = `
+      <div class="lb-left">
+        <div class="lb-rank">${medal}</div>
+        <div class="lb-avatar">${plr.avatar || '🐹'}</div>
+        <div class="lb-user">
+          <div class="lb-name">${escapeHtml(plr.nickname)} ${isMe ? '(Ты)' : ''}</div>
+          <div class="lb-meta">🔥 ${sCount} дн. • ♻️ ${rCount} перер. • 🐾 ★${plr.petPower || 0} • 🎁 ${plr.cases || 0} кейсов</div>
+        </div>
+      </div>
+      <div class="lb-score">
+        <strong>${mainVal}</strong>
+        <span>${subVal}</span>
+      </div>
+    `;
+    listEl.appendChild(row);
+  });
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, m => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m]));
+}
+
+function applyTheme() {
+  const isLight = state.theme === 'light';
+  document.body.classList.toggle('light-theme', isLight);
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.textContent = isLight ? '☀️' : '🌙';
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', isLight ? '#f1f5f9' : '#0f1221');
+}
+
+function updateUI() {
+  applyTheme();
+  const b = getBonuses();
+  const displayCount = Math.floor(state.count);
+  const currentGoal = getCurrentGoal();
+  const nextGoalAfterRebirth = BASE_GOAL + ((Number(state.rebirths) || 0) + 1) * GOAL_STEP;
+  const pct = Math.min(100, (displayCount / currentGoal) * 100);
+  const readyForRebirth = canRebirth();
+
+  document.getElementById('headerAvatar').textContent = state.account.avatar || '🐹';
+  document.getElementById('headerNickname').textContent = state.account.registered ? state.account.nickname : 'Войти / Топ';
+
+  document.getElementById('totalCount').textContent = displayCount.toLocaleString('ru-RU');
+  document.getElementById('goalStatus').textContent = readyForRebirth
+    ? '♻️ Цель достигнута! Можно переродиться'
+    : `Цель: ${currentGoal.toLocaleString('ru-RU')} (ост. ${Math.max(0, currentGoal - displayCount).toLocaleString('ru-RU')})`;
+  document.getElementById('perClickStat').textContent = b.click.toLocaleString('ru-RU');
+  document.getElementById('critStat').textContent = `Крит ×3: ${b.critChance}%`;
+  document.getElementById('perSecStat').textContent = b.dps.toLocaleString('ru-RU');
+  document.getElementById('equippedCountStat').textContent = `В бою: ${state.equipped.length} / 4`;
+
+  const unlockedCount = Object.keys(state.pets).length;
+  document.getElementById('uniquePetsStat').textContent = `Питомцев: ${unlockedCount} / ${PETS.length}`;
+  document.getElementById('rebirthCountStat').textContent = `♻️ ${(Number(state.rebirths) || 0).toLocaleString('ru-RU')}`;
+  document.getElementById('rebirthBonusStat').textContent = `Бонус: ×${b.mult.toFixed(1)}`;
+  const currentStreak = Math.max(1, Number(state.streak) || 1);
+  document.getElementById('streakCountStat').textContent = `🔥 ${currentStreak} ${currentStreak === 1 ? 'день' : (currentStreak < 5 ? 'дня' : 'дней')}`;
+  document.getElementById('streakBonusStat').textContent = `Серия: +${getStreakBonusPercent()}% (рекорд ${Math.max(currentStreak, Number(state.bestStreak) || 0)})`;
+
+  document.getElementById('progressGoalLabel').textContent = `Прогресс к цели: ${currentGoal.toLocaleString('ru-RU')} повторений`;
+  document.getElementById('progressPct').textContent = `${pct.toFixed(1)}%`;
+  document.getElementById('progressFill').style.width = `${pct}%`;
+
+  const rebirthBtn = document.getElementById('doRebirthBtn');
+  rebirthBtn.disabled = !readyForRebirth;
+  document.getElementById('rebirthBannerTitle').textContent = readyForRebirth
+    ? `♻️ Доступно перерождение #${(Number(state.rebirths) || 0) + 1}!`
+    : `♻️ Перерождение откроется на ${currentGoal.toLocaleString('ru-RU')} «онининони»`;
+  document.getElementById('rebirthBannerDesc').textContent =
+    `После перерождения новая цель станет ${nextGoalAfterRebirth.toLocaleString('ru-RU')} • Множитель вырастет до ×${(1 + ((Number(state.rebirths) || 0) + 1) * 0.5).toFixed(1)}`;
+
+  document.getElementById('btnBonusLabel').textContent = `+${b.click} за клик (крит ${b.critChance}%)`;
+  document.getElementById('soundToggleBtn').textContent = state.soundOn ? '🔊' : '🔇';
+
+  // Equipped strip
+  const strip = document.getElementById('equippedStrip');
+  strip.innerHTML = '';
+  if (state.equipped.length === 0) {
+    strip.innerHTML = '<span style="color:var(--muted); font-size:0.8rem;">Открой кейс в «🎁 Кейсы», чтобы призвать помощников</span>';
+  } else {
+    for (const id of state.equipped) {
+      const pet = PETS.find(p => p.id === id);
+      const lvl = state.pets[id] || 1;
+      if (!pet) continue;
+      const s = petStats(pet, lvl);
+      const chip = document.createElement('div');
+      chip.className = 'pet-helper';
+      chip.innerHTML = `<span class="emo">${pet.emoji}</span><span><strong>${pet.name}</strong> ★${lvl} (+${s.click})</span>`;
+      strip.appendChild(chip);
+    }
+  }
+
+  // Cases grid
+  const casesGrid = document.getElementById('casesGrid');
+  casesGrid.innerHTML = '';
+  for (const c of CASES) {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div>
+        <h3>${c.emoji} ${c.name}</h3>
+        <p>${c.desc}</p>
+      </div>
+      <button class="gold" ${spinning || state.count < c.cost ? 'disabled' : ''}>
+        Открыть за ${c.cost.toLocaleString('ru-RU')}
+      </button>
+    `;
+    card.querySelector('button').addEventListener('click', () => openCase(c));
+    casesGrid.appendChild(card);
+  }
+
+  // Pets grid
+  const petsGrid = document.getElementById('petsGrid');
+  petsGrid.innerHTML = '';
+  for (const pet of PETS) {
+    const lvl = state.pets[pet.id] || 0;
+    const isEq = state.equipped.includes(pet.id);
+    const s = petStats(pet, Math.max(1, lvl));
+    const card = document.createElement('div');
+    card.className = `card rarity-${pet.rarity}`;
+    card.innerHTML = `
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h3>${pet.emoji} ${pet.name}</h3>
+          <span>${lvl > 0 ? `★${lvl}` : '🔒'}</span>
+        </div>
+        <p style="margin-bottom:5px;">${RARITY_LABEL[pet.rarity]}</p>
+        <p>Клик: <strong>+${s.click}</strong> • Авто: <strong>+${s.dps}/с</strong> • Крит: <strong>+${s.crit}%</strong></p>
+      </div>
+      <button class="${isEq ? 'primary' : ''}" ${lvl === 0 ? 'disabled' : ''}>
+        ${lvl === 0 ? 'Из кейсов' : (isEq ? '✓ В команде (снять)' : 'Позвать на клики')}
+      </button>
+    `;
+    card.querySelector('button').addEventListener('click', () => toggleEquip(pet.id));
+    petsGrid.appendChild(card);
+  }
+
+  // Shop grid
+  const shopGrid = document.getElementById('shopGrid');
+  shopGrid.innerHTML = '';
+  for (const upg of UPGRADES) {
+    const lvl = state.upgrades[upg.id] || 0;
+    const cost = getUpgradeCost(upg);
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div>
+        <h3>${upg.name} <span style="color:var(--accent-2); font-size:0.82rem;">Ур. ${lvl}</span></h3>
+        <p>${upg.desc}</p>
+      </div>
+      <button class="primary" ${state.count < cost ? 'disabled' : ''}>
+        Купить за ${cost.toLocaleString('ru-RU')}
+      </button>
+    `;
+    card.querySelector('button').addEventListener('click', () => buyUpgrade(upg.id));
+    shopGrid.appendChild(card);
+  }
+
+  document.getElementById('textPreview').value = buildOninononiText(Math.min(currentGoal, 10000));
+  renderLeaderboard();
+}
+
+/* =========================================================
+   6. MODALS & EVENT LISTENERS
+   ========================================================= */
+function renderAvatarPicker() {
+  const picker = document.getElementById('avatarPicker');
+  picker.innerHTML = '';
+  AVATARS.forEach((av) => {
+    const div = document.createElement('div');
+    div.className = 'av-opt' + (selectedAvatar === av ? ' selected' : '');
+    div.textContent = av;
+    div.addEventListener('click', () => {
+      selectedAvatar = av;
+      renderAvatarPicker();
+    });
+    picker.appendChild(div);
+  });
+}
+
+function openAccountModal() {
+  selectedAvatar = state.account.avatar || '🐹';
+  document.getElementById('regNicknameInput').value = state.account.registered ? state.account.nickname : '';
+  document.getElementById('regPinInput').value = state.account.pin || '';
+  document.getElementById('authModalTitle').textContent = state.account.registered
+    ? `👤 Профиль: ${state.account.nickname}`
+    : '👤 Регистрация в Топах мира';
+  renderAvatarPicker();
+  document.getElementById('accountModal').classList.add('open');
+}
+
+function closeAccountModal() {
+  document.getElementById('accountModal').classList.remove('open');
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.tab).classList.add('active');
+    if (btn.dataset.tab === 'worldTab') {
+      renderLeaderboard();
+    }
+    if (btn.dataset.tab === 'chatTab') {
+      renderChatMessages();
+    }
+  });
+});
+
+document.getElementById('themeToggleBtn').addEventListener('click', () => {
+  state.theme = state.theme === 'light' ? 'dark' : 'light';
+  applyTheme();
+  saveState();
+  showToast(state.theme === 'light' ? '☀️ Включена светлая тема' : '🌙 Включена тёмная тема');
+});
+
+document.querySelectorAll('[data-room]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-room]').forEach(b => b.classList.remove('primary'));
+    btn.classList.add('primary');
+    currentChatRoom = btn.dataset.room;
+    const titles = {
+      global: 'Общий канал • Общайся и делись прогрессом',
+      flex: 'Дроп и питомцы • Похвастайся редкими зверями',
+      help: 'Советы • Обсуждаем тактики прокачки'
+    };
+    document.getElementById('chatRoomSubtitle').textContent = titles[currentChatRoom] || '';
+    renderChatMessages();
+  });
+});
+
+document.getElementById('sendChatBtn').addEventListener('click', () => sendChatMessage());
+document.getElementById('chatInput').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    sendChatMessage();
+  }
+});
+document.getElementById('shareFlexBtn').addEventListener('click', () => {
+  const b = getBonuses();
+  const petsCount = Object.keys(state.pets).length;
+  sendChatMessage(`📊 Мой прогресс: ${Math.floor(state.count).toLocaleString('ru-RU')} «онининони», +${b.click} за клик, питомцев ${petsCount}/12!`);
+});
+
+document.querySelectorAll('[data-sort]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-sort]').forEach(b => b.classList.remove('primary'));
+    btn.classList.add('primary');
+    lbSortBy = btn.dataset.sort;
+    renderLeaderboard();
+  });
+});
+document.getElementById('refreshLbBtn').addEventListener('click', () => {
+  syncProgressToCloud(false);
+  renderLeaderboard();
+});
+
+document.getElementById('mainClickBtn').addEventListener('click', doClick);
+document.getElementById('doRebirthBtn').addEventListener('click', performRebirth);
+document.getElementById('headerProfileBtn').addEventListener('click', openAccountModal);
+document.getElementById('openAccountBtn').addEventListener('click', openAccountModal);
+document.getElementById('closeAccountModalBtn').addEventListener('click', closeAccountModal);
+document.getElementById('saveAccountBtn').addEventListener('click', registerOrSaveAccount);
+document.getElementById('loginExistingBtn').addEventListener('click', loginExistingAccount);
+
+document.getElementById('syncNowBtn').addEventListener('click', () => syncProgressToCloud(false));
+
+function buildStandaloneHtmlSnapshot() {
+  const clone = document.documentElement.cloneNode(true);
+  clone.querySelectorAll('#pwaBanner').forEach(el => el.classList.add('hidden'));
+  clone.querySelectorAll('.modal-backdrop').forEach(el => el.classList.remove('open'));
+  const toastEl = clone.querySelector('#toast');
+  if (toastEl) toastEl.classList.remove('show');
+  return '<!DOCTYPE html>\n' + clone.outerHTML;
+}
+
+function openFileExportFallback(htmlContent) {
+  const modal = document.getElementById('fileExportModal');
+  const area = document.getElementById('fileExportCodeArea');
+  if (area) area.value = htmlContent;
+  if (modal) modal.classList.add('open');
+}
+
+function triggerGameFileDownload(filename = 'oninononi_clicker_world.html') {
+  saveState();
+  const htmlContent = buildStandaloneHtmlSnapshot();
+  let blobUrl = '';
+
+  try {
+    const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8' });
+    blobUrl = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = blobUrl;
+    a.download = filename;
+    a.rel = 'noopener';
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
+    a.remove();
+
+    setTimeout(() => {
+      if (blobUrl) URL.revokeObjectURL(blobUrl);
+    }, 4000);
+
+    showToast('💾 Запущено скачивание oninononi_clicker_world.html');
+    return true;
+  } catch (errBlob) {
+    if (blobUrl) {
+      try { URL.revokeObjectURL(blobUrl); } catch (e) {}
+    }
+  }
+
+  try {
+    const dataUrl = 'data:text/html;charset=utf-8,' + encodeURIComponent(htmlContent);
+    const a2 = document.createElement('a');
+    a2.href = dataUrl;
+    a2.download = filename;
+    a2.style.display = 'none';
+    document.body.appendChild(a2);
+    a2.click();
+    a2.remove();
+    showToast('💾 Скачивание запущено через резервный способ');
+    return true;
+  } catch (errData) {
+    openFileExportFallback(htmlContent);
+    showToast('Браузер заблокировал файл — доступен ручной код');
+    return false;
+  }
+}
+
+document.getElementById('downloadAppFileBtn').addEventListener('click', () => {
+  triggerGameFileDownload('oninononi_clicker_world.html');
+});
+
+document.getElementById('closeFileExportModalBtn').addEventListener('click', () => {
+  document.getElementById('fileExportModal').classList.remove('open');
+});
+
+document.getElementById('copyFileCodeBtn').addEventListener('click', () => {
+  const area = document.getElementById('fileExportCodeArea');
+  const txt = area ? area.value : '';
+  if (!txt) return;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(txt).then(() => {
+      showToast('📋 Весь код игры скопирован!');
+    }).catch(() => {
+      area.focus();
+      area.select();
+      document.execCommand('copy');
+      showToast('📋 Весь код игры скопирован!');
+    });
+  } else {
+    area.focus();
+    area.select();
+    document.execCommand('copy');
+    showToast('📋 Весь код игры скопирован!');
+  }
+});
+
+document.getElementById('retryDirectDownloadBtn').addEventListener('click', () => {
+  const ok = triggerGameFileDownload('oninononi_clicker_world.html');
+  if (ok) {
+    document.getElementById('fileExportModal').classList.remove('open');
+  }
+});
+
+document.getElementById('dismissBannerBtn').addEventListener('click', () => {
+  document.getElementById('pwaBanner').classList.add('hidden');
+});
+document.getElementById('closeInstallHelpBtn').addEventListener('click', () => {
+  document.getElementById('installHelpModal').classList.remove('open');
+});
+document.getElementById('okInstallHelpBtn').addEventListener('click', () => {
+  document.getElementById('installHelpModal').classList.remove('open');
+});
+
+document.getElementById('soundToggleBtn').addEventListener('click', () => {
+  state.soundOn = !state.soundOn;
+  updateUI();
+  saveState();
+});
+
+document.getElementById('copyTextBtn').addEventListener('click', () => {
+  const txt = buildOninononiText(GOAL);
+  if (!txt) {
+    showToast('Сначала накликай хотя бы 1 «онининони»');
+    return;
+  }
+  const ta = document.getElementById('textPreview');
+  ta.value = txt;
+  ta.select();
+  try {
+    document.execCommand('copy');
+    showToast('Скопировано в буфер обмена!');
+  } catch (e) {
+    navigator.clipboard?.writeText(txt).then(() => showToast('Скопировано в буфер обмена!'));
+  }
+});
+
+document.getElementById('downloadTxtBtn').addEventListener('click', () => {
+  const txt = buildOninononiText(GOAL);
+  if (!txt) {
+    showToast('Счётчик пока пуст');
+    return;
+  }
+  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'oninononi.txt';
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+document.getElementById('resetProgressBtn').addEventListener('click', () => {
+  localStorage.removeItem(STORAGE_KEY);
+  state = {
+    count: 0,
+    rebirths: 0,
+    streak: 1,
+    bestStreak: 1,
+    lastVisitDay: getDayKey(),
+    baseClick: 1,
+    baseDps: 0,
+    casesOpened: 0,
+    soundOn: state.soundOn,
+    upgrades: { glove: 0, mega: 0, auto1: 0, auto2: 0 },
+    pets: {},
+    equipped: [],
+    account: state.account
+  };
+  saveState();
+  updateUI();
+  closeAccountModal();
+  showToast('Локальный прогресс сброшен');
+});
+
+// Auto-clicker tick every second
+setInterval(() => {
+  const b = getBonuses();
+  if (b.dps > 0 && !spinning) {
+    state.count += b.dps;
+    updateUI();
+    saveState();
+  }
+}, 1000);
+
+// Auto-sync to World Leaderboard every 12 seconds if registered
+setInterval(() => {
+  if (state.account.registered && navigator.onLine) {
+    syncProgressToCloud(true);
+  }
+}, 12000);
+
+loadState();
+const streakInfo = updateDailyStreakOnOpen();
+updateUI();
+if (streakInfo.status === 'continued') {
+  showToast(`🔥 Серия захода продлена: ${streakInfo.streak} дн. (+${getStreakBonusPercent()}%)`);
+} else if (streakInfo.status === 'reset' && streakInfo.previous > 1) {
+  showToast(`💔 Вы пропустили день — серия сброшена на 1 день`);
+}
+initCloud();
+</script>
+</body>
+</html>
+```
